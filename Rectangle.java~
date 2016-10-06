@@ -1,0 +1,11 @@
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import javax.swing.*;
+
+public class Rectangle extends RandomShape{
+  Super(x,y,color);
+  public void draw{
+    g.fillRect(x,y,10,10);
+  }
+}
