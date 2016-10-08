@@ -1,0 +1,72 @@
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import javax.swing.*;
+
+public class Note extends RandomShape{
+  int x1; //width oval
+  int y1; //height oval
+  int xa; //line angle
+  int y2; // second y coord line
+  boolean invert;
+  boolean rotate;
+  
+  Note(int maxX, int maxY){
+    super(maxX,maxY);
+    x1 = 7 + random.nextInt(15);
+    y1 = 5 + random.nextInt(10);
+    y2 = y - random.nextInt(50);
+	invert = random.nextBoolean();
+	rotate = random.nextBoolean();
+	
+	if (rotate){
+		xa = random.nextInt(10);
+	} else {
+		xa = -random.nextInt(10);
+	}
+  }
+  
+  @Override
+  public void draw(Graphics g){
+    g.setColor(color);
+	
+	if (invert){
+		g.fillOval(x, y, x1, y1);
+		g.drawLine(x, y, x + xa, y2);
+	} else {
+		g.fillOval(x, y, x1, y1);
+		g.drawLine(x + x1, y + y1, x + x1 + xa, y2);
+	}
+  }
+}
+
+
+class PolygonBackground extends RandomShape{
+  int[] xval;
+  int[] yval;
+  int no = random.nextInt(10);
+  
+  PolygonBackground(int maxX, int maxY){
+    super(maxX,maxY);
+	int r = 128 + random.nextInt(128);
+    int g = 128 + random.nextInt(128);
+    int b = 128 + random.nextInt(128);
+	int a = random.nextInt(56);
+    color = new Color(r,g,b,a); 
+	
+	
+	xval = new int[no];
+	yval = new int[no];
+	
+	for(int i = 0; i < no; i++){
+      xval[i] = -30+random.nextInt(maxX+60);
+      yval[i] = -30+random.nextInt(maxY+60);
+	}
+  }
+  
+  @Override
+  public void draw(Graphics g){
+    g.setColor(color);
+    g.fillPolygon(xval, yval, no);
+  }
+}
